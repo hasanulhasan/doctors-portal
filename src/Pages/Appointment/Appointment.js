@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBanner from './AppBanner/AppBanner';
+import AvailAppointment from './AvailAppointment/AvailAppointment';
 
 const Appointment = () => {
+  const [selected, setSelected] = useState(new Date());
+
   return (
     <div>
-      <AppBanner></AppBanner>
+      <AppBanner
+        selected={selected}
+        setSelected={setSelected}
+      ></AppBanner>
+      <AvailAppointment
+        selected={selected}
+      ></AvailAppointment>
     </div>
   );
 };
