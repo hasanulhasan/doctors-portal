@@ -9,8 +9,10 @@ const Service = ({ service, setTreatment }) => {
         <p>{slots.length > 0 ? slots[0] : 'Try another Day'}</p>
         <p>{slots.length} {slots.length > 1 ? 'spaces' : 'space'} available</p>
         <div>
+          {/* The button to open modal */}
           <label
-            htmlFor="booking-modal" className="btn btn-primary bg-gradient-to-r from-primary to-secondary"
+            disabled={slots.length === 0}
+            htmlFor="booking-modal" className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white"
             onClick={() => setTreatment(service)}
           >Book appointment</label>
         </div>
