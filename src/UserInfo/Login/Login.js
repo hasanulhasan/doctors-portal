@@ -9,18 +9,16 @@ const Login = () => {
   return (
     <div className='h-[800px] flex justify-center items-center'>
       <div>
-        <p>Login</p>
+        <p className='text-4xl text-center p-3'>Login</p>
         <form onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}>
           {/* <Header /> */}
-          <input {...register("firstName")} placeholder="First name" />
-          <select {...register("category", { required: true })}>
-            <option value="">Select...</option>
-            <option value="A">Option A</option>
-            <option value="B">Option B</option>
-          </select>
-          <textarea {...register("aboutYou")} placeholder="About you" />
-          <p>{data}</p>
-          <input type="submit" />
+          <input {...register("firstName")} placeholder="First name" className="input input-bordered w-full my-4" />
+          <input {...register("firstName")} placeholder="First name" className="input input-bordered w-full" />
+          {/* <p>{data}</p> */}
+          {/* <input type="submit" /> */}
+          <div className='flex justify-center'>
+            <button className="btn btn-active btn-accent my-4">Log in</button>
+          </div>
         </form>
       </div>
     </div>
