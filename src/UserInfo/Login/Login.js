@@ -7,17 +7,31 @@ const Login = () => {
   const [data, setData] = useState("");
 
   return (
-    <div className='h-[800px] flex justify-center items-center'>
-      <div>
-        <p className='text-4xl text-center p-3'>Login</p>
+    <div className='h-[700px] flex justify-center items-center'>
+      <div className='outline rounded-lg p-5 w-80'>
+        <p className='text-4xl text-center p-3 font-bold'>Login</p>
         <form onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))}>
           {/* <Header /> */}
-          <input {...register("firstName")} placeholder="First name" className="input input-bordered w-full my-4" />
-          <input {...register("firstName")} placeholder="First name" className="input input-bordered w-full" />
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text">Name</span>
+            </label>
+            <input type='text' {...register("name")} placeholder="Name" className="input input-bordered w-full" />
+          </div>
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input type='password' {...register("email")} placeholder="Email" className="input input-bordered w-full" />
+          </div>
           {/* <p>{data}</p> */}
           {/* <input type="submit" /> */}
           <div className='flex justify-center'>
-            <button className="btn btn-active btn-accent my-4">Log in</button>
+            <button className="btn btn-active btn-accent mt-3 w-full">Log in</button>
+          </div>
+          <div className="divider">OR</div>
+          <div className='flex justify-center'>
+            <button className="btn btn-primary w-full uppercase">log in with Google</button>
           </div>
         </form>
       </div>
