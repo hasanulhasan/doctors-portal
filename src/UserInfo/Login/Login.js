@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 // import Header from "./Header";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, formState: { errors }, handleSubmit } = useForm();
   const handleLogin = (data) => {
     console.log(data);
   }
@@ -18,13 +18,15 @@ const Login = () => {
             <label className="label">
               <span className="label-text">Name</span>
             </label>
-            <input type='text' {...register("name")} placeholder="Name" className="input input-bordered w-full" />
+            <input type='text' {...register("name", { required: true, minLength: { value: 12, message: "Your name is too short" } })} placeholder="Name" className="input input-bordered w-full" />
+            {errors.name && <p role="alert" className='text-red-600'>{errors.name?.message}</p>}
           </div>
           <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Email</span>
             </label>
-            <input type='password' {...register("email")} placeholder="Email" className="input input-bordered w-full" />
+            <input type='email' {...register("email", { required: "Email Address is required" })} placeholder="Email" className="input input-bordered w-full" />
+            {errors.email && <p role="alert" className='text-red-600'>{errors.email?.message}</p>}
           </div>
           {/* <input type="submit" /> */}
           <div className='flex justify-center'>
