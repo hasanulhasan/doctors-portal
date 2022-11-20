@@ -1,3 +1,4 @@
+import { clear } from '@testing-library/user-event/dist/clear';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -9,10 +10,11 @@ const SignUp = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
   const handleLogin = (data) => {
     console.log(data);
-    createUser(data.email, data.name)
+    createUser(data.email, data.password)
       .then(result => {
         const user = result.user;
         console.log(user);
+
       })
       .catch(err => console.error(err))
   }

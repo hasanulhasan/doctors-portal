@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 // import Header from "./Header";
 
 const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
+  const { signIn } = useContext(AuthContext);
+
   const handleLogin = (data) => {
     console.log(data);
+    signIn(data.email, data.password)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch(err => console.error(err))
   }
 
   return (
@@ -14,14 +23,6 @@ const Login = () => {
       <div className='outline rounded-lg p-5 w-96'>
         <p className='text-4xl text-center p-2 font-bold'>Login</p>
         <form onSubmit={handleSubmit(handleLogin)}>
-          {/* <Header /> */}
-          <div className="form-control w-full">
-            <label className="label">
-              <span className="label-text">Name</span>
-            </label>
-            <input type='text' {...register("name", { required: true, minLength: { value: 12, message: "Your name is too short" } })} placeholder="Name" className="input input-bordered w-full" />
-            {errors.name && <p role="alert" className='text-red-600'>{errors.name?.message}</p>}
-          </div>
           <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Email</span>
@@ -29,7 +30,13 @@ const Login = () => {
             <input type='email' {...register("email", { required: "Email Address is required" })} placeholder="Email" className="input input-bordered w-full" />
             {errors.email && <p role="alert" className='text-red-600'>{errors.email?.message}</p>}
           </div>
-          {/* <input type="submit" /> */}
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text">Password</span>
+            </label>
+            <input type='password' {...register("password", { required: "Password is required" })} placeholder="Password" className="input input-bordered w-full" />
+            {errors.password && <p role="alert" className='text-red-600'>{errors.password?.message}</p>}
+          </div>
           <div className='flex justify-center'>
             <button className="btn btn-active btn-accent mt-3 w-full text-white">Log in</button>
           </div>
