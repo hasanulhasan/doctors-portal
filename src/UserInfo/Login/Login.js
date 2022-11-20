@@ -2,20 +2,24 @@ import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
-// import Header from "./Header";
 
 const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
   const { signIn } = useContext(AuthContext);
+  const [loginError, setLoginError] = useState('');
 
   const handleLogin = (data) => {
+    setLoginError('');
     console.log(data);
     signIn(data.email, data.password)
       .then(result => {
         const user = result.user;
         console.log(user);
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        console.error(err.message);
+        setLoginError(err.message);
+      })
   }
 
   return (
@@ -37,6 +41,7 @@ const Login = () => {
             <input type='password' {...register("password", { required: "Password is required" })} placeholder="Password" className="input input-bordered w-full" />
             {errors.password && <p role="alert" className='text-red-600'>{errors.password?.message}</p>}
           </div>
+          {loginError && <p className='text-red-600 text-center'>{loginError}</p>}
           <div className='flex justify-center'>
             <button className="btn btn-active btn-accent mt-3 w-full text-white">Log in</button>
           </div>
