@@ -1,9 +1,11 @@
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const BookingModal = ({ treatment, selected }) => {
   const { name, slots } = treatment; // treatment id another name of services
   const date = format(selected, 'PP');
+  const { user } = useContext(AuthContext);
   const handleBooking = (e) => {
     e.preventDefault();
     const form = e.target;

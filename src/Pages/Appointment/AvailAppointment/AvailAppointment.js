@@ -2,16 +2,33 @@ import React, { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import Service from './Service';
 import BookingModal from '../BookingModal/BookingModal';
+import { useQuery } from '@tanstack/react-query';
+import { async } from '@firebase/util';
 
 const AvailAppointment = ({ selected }) => {
-  const [services, setServices] = useState([]);
+  // const [services, setServices] = useState([]);
   const [treatment, setTreatment] = useState(null);
 
-  useEffect(() => {
-    fetch('services.json')
-      .then(res => res.json())
-      .then(data => setServices(data))
-  }, [])
+  const { data: services = [] } = useQuery({
+    queryKey: ['services'],
+    queryFn: async () => {
+      const res = await fetch('http://localhost:5000/services')
+      const data = await res.json();
+      return data
+    }
+  })
+
+  // const { data: services = [] } = useQuery({
+  //   queryKey: ['services'],
+  //   queryFn: () => fetch('http://localhost:5000/services')
+  //     .then(res => res.json())
+  // })
+
+  // useEffect(() => {
+  //   fetch('http://localhost:5000/services')
+  //     .then(res => res.json())
+  //     .then(data => setServices(data))
+  // }, [])
   return (
     <div className='my-16'>
       <p className='text-secondary text-center text-xl font-bold'>You have selected {format(selected, 'PP')}</p>

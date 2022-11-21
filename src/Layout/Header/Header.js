@@ -14,10 +14,14 @@ const Header = () => {
   const menuItems = <React.Fragment>
     <li><Link to='/'>Home</Link></li>
     <li><Link to='/appointment'>Appointment</Link></li>
-    <li><Link to='/login'>Login</Link></li>
-    <li><Link to='/signup'>SignUp</Link></li>
+    <li><Link to='/dashboard'>DashBoard</Link></li>
     {
-      user?.uid ? <><li><button onClick={handleLogOut}>Logout</button></li></> : <><li><Link to='/login'>Login</Link></li></>
+      user?.uid ?
+        <>
+          <li><Link to='/dashboard'>Reviews</Link></li>
+          <li><button onClick={handleLogOut}>Logout</button></li></>
+        :
+        <><li><Link to='/login'>Login</Link></li></>
     }
   </React.Fragment>
 

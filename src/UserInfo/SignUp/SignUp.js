@@ -1,11 +1,14 @@
 import { clear } from '@testing-library/user-event/dist/clear';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
+  const [signupError, setSignupError] = useState('');
+  const navigate = useNavigate();
 
   const { register, formState: { errors }, handleSubmit } = useForm();
   const handleLogin = (data) => {
@@ -14,9 +17,21 @@ const SignUp = () => {
       .then(result => {
         const user = result.user;
         console.log(user);
+        toast('User created successfully')
+        const userInfo = {
+          displayName: data.name
+        }
+        updateUser(userInfo)
+          .then(() => {
+            navigate('/');
+          })
+          .catch(err => console.error(err))
 
       })
-      .catch(err => console.error(err))
+      .catch(err => {
+        console.error(err)
+        setSignupError(err.message)
+      })
   }
   return (
     <div className='h-[700px] flex justify-center items-center'>
@@ -29,7 +44,7 @@ const SignUp = () => {
             </label>
             <input type='text' {...register("name", {
               required: "Name is required",
-              minLength: { value: 12, message: "Your name is too short" }
+              minLength: { value: 8, message: "Your name is too short" }
             })} placeholder="Name" className="input input-bordered w-full" />
             {errors.name && <p role="alert" className='text-red-600'>{errors.name?.message}</p>}
           </div>
@@ -50,6 +65,7 @@ const SignUp = () => {
             })} placeholder="Password" className="input input-bordered w-full" />
             {errors.password && <p role="alert" className='text-red-600'>{errors.password?.message}</p>}
           </div>
+          {signupError && <p className='text-red-600 text-center'>{signupError}</p>}
           <div className='flex justify-center'>
             <button className="btn btn-active btn-accent mt-3 w-full text-white">Sign Up</button>
           </div>
