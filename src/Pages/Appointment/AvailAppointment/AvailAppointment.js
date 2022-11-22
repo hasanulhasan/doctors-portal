@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { format } from 'date-fns';
 import Service from './Service';
 import BookingModal from '../BookingModal/BookingModal';
 import { useQuery } from '@tanstack/react-query';
-import { async } from '@firebase/util';
 
 const AvailAppointment = ({ selected }) => {
   // const [services, setServices] = useState([]);
   const [treatment, setTreatment] = useState(null);
+  const date = format(selected, 'PP');
 
-  const { data: services = [] } = useQuery({
-    queryKey: ['services'],
+  const { data: services = [], refetch } = useQuery({
+    queryKey: ['services', date],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/services')
+      const res = await fetch(`http://localhost:5000/services?date=${date}`)
       const data = await res.json();
       return data
     }
@@ -46,8 +46,8 @@ const AvailAppointment = ({ selected }) => {
           treatment={treatment}
           selected={selected}
           setTreatment={setTreatment}
+          refetch={refetch}
         >
-
         </BookingModal>
       }
     </div>
