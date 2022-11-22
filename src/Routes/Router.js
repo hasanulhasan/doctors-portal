@@ -4,6 +4,7 @@ import DashBoardLayout from "../Layout/DashBoardLayout/DashBoardLayout";
 import Main from "../Layout/Main";
 import Appointment from "../Pages/Appointment/Appointment";
 import DashBoard from "../Pages/DashBoard/DashBoard";
+import MyAppointment from "../Pages/DashBoard/MyAppointment/MyAppointment";
 import Home from "../Pages/Home/Home";
 import Login from "../UserInfo/Login/Login";
 import SignUp from "../UserInfo/SignUp/SignUp";
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/dashboard',
-        element: <DashBoard></DashBoard>
+        element: <MyAppointment></MyAppointment>
       }
     ]
   }

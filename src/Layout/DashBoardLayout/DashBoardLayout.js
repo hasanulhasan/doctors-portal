@@ -8,7 +8,7 @@ const DashBoardLayout = () => {
       <Header></Header>
       <div className="drawer drawer-mobile">
         <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <div className="drawer-content">
           <Outlet></Outlet>
         </div>
         <div className="drawer-side">
@@ -17,7 +17,6 @@ const DashBoardLayout = () => {
             <li><a>Sidebar Item 1</a></li>
             <li><a>Sidebar Item 2</a></li>
           </ul>
-
         </div>
       </div>
     </div>
