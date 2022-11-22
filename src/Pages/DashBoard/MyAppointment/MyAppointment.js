@@ -24,19 +24,19 @@ const MyAppointment = () => {
         <table className="table w-full">
           <thead>
             <tr>
-              <th></th>
-              <th>Treatment</th>
+              <th>No</th>
+              <th>Patient</th>
               <th>Date</th>
-              <th>Time</th>
+              <th>Slot</th>
             </tr>
           </thead>
           <tbody>
             {
-              bookings.map((book, i) => <tr>
-                <th>{i}</th>
-                <td>Hart Hagerty</td>
-                <td>Desktop Support Technician</td>
-                <td>Purple</td>
+              bookings.map((book, i) => <tr key={book._id} className='hover'>
+                <th>{i + 1}</th>
+                <td>{book.patient}</td>
+                <td>{book.appointmentDate}</td>
+                <td>{book.slot}</td>
               </tr>)
             }
           </tbody>

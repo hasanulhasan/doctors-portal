@@ -59,9 +59,9 @@ const BookingModal = ({ treatment, selected, setTreatment, refetch }) => {
                 slots.map((slot, i) => <option key={i} value={slot}>{slot}</option>)
               }
             </select>
-            <input name="name" type="text" placeholder="Your name" defaultValue={user?.displayName} disabled className="input input-bordered input-secondary w-full" />
+            <input name="name" type="text" placeholder="Your name" defaultValue={user?.displayName} disabled className="input input-bordered input-secondary w-full" required />
             <input name="phone" type="text" placeholder="Phone" className="input input-bordered input-secondary w-full" required />
-            <input name="email" type="email" defaultValue={user?.email} disabled placeholder="Email" className="input input-bordered input-secondary w-full" />
+            <input name="email" type="email" defaultValue={user?.email} disabled placeholder="Email" className="input input-bordered input-secondary w-full" required />
             <div>
               <button type='submit' className="btn btn-info">Submit</button>
             </div>
