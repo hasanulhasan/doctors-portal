@@ -37,6 +37,9 @@ const BookingModal = ({ treatment, selected, setTreatment, refetch }) => {
           toast.success('Booking successful');
           refetch();
         }
+        else {
+          toast.error(data.message);
+        }
       })
 
   }
@@ -57,7 +60,7 @@ const BookingModal = ({ treatment, selected, setTreatment, refetch }) => {
               }
             </select>
             <input name="name" type="text" placeholder="Your name" defaultValue={user?.displayName} disabled className="input input-bordered input-secondary w-full" />
-            <input name="phone" type="text" placeholder="Phone" className="input input-bordered input-secondary w-full" />
+            <input name="phone" type="text" placeholder="Phone" className="input input-bordered input-secondary w-full" required />
             <input name="email" type="email" defaultValue={user?.email} disabled placeholder="Email" className="input input-bordered input-secondary w-full" />
             <div>
               <button type='submit' className="btn btn-info">Submit</button>

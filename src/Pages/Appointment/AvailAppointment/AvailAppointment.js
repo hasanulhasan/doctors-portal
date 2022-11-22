@@ -3,20 +3,24 @@ import { format } from 'date-fns';
 import Service from './Service';
 import BookingModal from '../BookingModal/BookingModal';
 import { useQuery } from '@tanstack/react-query';
+import Loader from '../../../Layout/Loader/Loader';
 
 const AvailAppointment = ({ selected }) => {
   // const [services, setServices] = useState([]);
   const [treatment, setTreatment] = useState(null);
   const date = format(selected, 'PP');
 
-  const { data: services = [], refetch } = useQuery({
+  const { data: services = [], refetch, isLoading } = useQuery({
     queryKey: ['services', date],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/services?date=${date}`)
       const data = await res.json();
       return data
     }
-  })
+  });
+  if (isLoading) {
+    return <Loader></Loader>
+  }
 
   // const { data: services = [] } = useQuery({
   //   queryKey: ['services'],
