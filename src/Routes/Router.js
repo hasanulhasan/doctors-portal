@@ -3,6 +3,7 @@ import PrivateRoute from "../Contexts/PrivateRoute/PrivateRoute";
 import DashBoardLayout from "../Layout/DashBoardLayout/DashBoardLayout";
 import Main from "../Layout/Main";
 import Appointment from "../Pages/Appointment/Appointment";
+import AllUsers from "../Pages/DashBoard/Allusers/AllUsers";
 import DashBoard from "../Pages/DashBoard/DashBoard";
 import MyAppointment from "../Pages/DashBoard/MyAppointment/MyAppointment";
 import Home from "../Pages/Home/Home";
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <MyAppointment></MyAppointment>
+      },
+      {
+        path: '/dashboard/allusers',
+        element: <AllUsers></AllUsers>
       }
     ]
   }
