@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
+import ConfirmationModal from './ConfirmationModal';
 
 const ManageDoctor = () => {
+  const [deletingDoctor, setDeletingDoctor] = useState(null);
 
   const { data: doctors = [], isLoading } = useQuery({
     queryKey: ['doctors'],
@@ -24,6 +26,7 @@ const ManageDoctor = () => {
               <th>Name</th>
               <th>email</th>
               <th>Specialty</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -38,11 +41,17 @@ const ManageDoctor = () => {
                 <td>{doctor.name}</td>
                 <td>{doctor.email}</td>
                 <td>{doctor.specialty}</td>
+                <td>
+                  <label onClick={() => setDeletingDoctor(doctor)} htmlFor="confirmation-modal" className='btn btn-sm' >Delete</label>
+                </td>
               </tr>)
             }
           </tbody>
         </table>
       </div>
+      {
+        deletingDoctor && <ConfirmationModal></ConfirmationModal>
+      }
     </div>
   );
 };
