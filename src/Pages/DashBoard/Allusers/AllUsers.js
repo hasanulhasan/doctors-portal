@@ -7,6 +7,16 @@ const AllUsers = () => {
   // const { user } = useContext(AuthContext);
   const url = `http://localhost:5000/users`;
 
+  const { data: users = [], refetch } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      const res = await fetch(url);
+      const data = await res.json();
+      return data;
+    }
+
+  })
+
   const handleMakeAdmin = id => {
     console.log('clicked')
     fetch(`http://localhost:5000/users/admin/${id}`, {
@@ -21,16 +31,6 @@ const AllUsers = () => {
         }
       })
   }
-
-  const { data: users = [], refetch } = useQuery({
-    queryKey: ['users'],
-    queryFn: async () => {
-      const res = await fetch(url);
-      const data = await res.json();
-      return data;
-    }
-
-  })
 
   return (
     <div>
