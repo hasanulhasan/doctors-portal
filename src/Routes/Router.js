@@ -11,11 +11,13 @@ import Payment from "../Pages/DashBoard/Payment/Payment";
 import Home from "../Pages/Home/Home";
 import Login from "../UserInfo/Login/Login";
 import SignUp from "../UserInfo/SignUp/SignUp";
+import Error from "../Utilities/Error/Error";
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: '/',

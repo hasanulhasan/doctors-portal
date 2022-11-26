@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const { register, formState: { errors }, handleSubmit, reset } = useForm();
   const { signIn } = useContext(AuthContext);
   const [loginError, setLoginError] = useState('');
   const location = useLocation();
@@ -19,6 +19,7 @@ const Login = () => {
       .then(result => {
         const user = result.user;
         console.log(user);
+        reset();
         navigate(from, { replace: true })
       })
       .catch(err => {

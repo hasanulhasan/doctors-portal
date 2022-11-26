@@ -1,3 +1,4 @@
+import { clear } from '@testing-library/user-event/dist/clear';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -9,14 +10,15 @@ const SignUp = () => {
   const [signupError, setSignupError] = useState('');
   const navigate = useNavigate();
 
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const { register, formState: { errors }, handleSubmit, clear } = useForm();
   const handleLogin = (data) => {
     console.log(data);
     createUser(data.email, data.password)
       .then(result => {
         const user = result.user;
         console.log(user);
-        toast('User created successfully')
+        toast('User created successfully');
+        clear()
         const userInfo = {
           displayName: data.name
         }
