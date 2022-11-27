@@ -10,7 +10,7 @@ const SignUp = () => {
   const [signupError, setSignupError] = useState('');
   const navigate = useNavigate();
 
-  const { register, formState: { errors }, handleSubmit, clear } = useForm();
+  const { register, formState: { errors }, handleSubmit } = useForm();
   const handleLogin = (data) => {
     console.log(data);
     createUser(data.email, data.password)
@@ -18,7 +18,6 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         toast('User created successfully');
-        clear()
         const userInfo = {
           displayName: data.name
         }
@@ -27,7 +26,6 @@ const SignUp = () => {
             saveUser(data.name, data.email);
           })
           .catch(err => console.error(err))
-
       })
       .catch(err => {
         console.error(err)

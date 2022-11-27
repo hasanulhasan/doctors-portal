@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminRoute from "../Contexts/AdminRoute";
 import PrivateRoute from "../Contexts/PrivateRoute/PrivateRoute";
 import DashBoardLayout from "../Layout/DashBoardLayout/DashBoardLayout";
 import Main from "../Layout/Main";
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard/adddoctor',
-        element: <AddDoctor></AddDoctor>
+        element: <AdminRoute><AddDoctor></AddDoctor></AdminRoute>
       },
       {
         path: '/dashboard/managedoctors',
