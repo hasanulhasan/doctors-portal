@@ -5,7 +5,7 @@ import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const AllUsers = () => {
   // const { user } = useContext(AuthContext);
-  const url = `http://localhost:5000/users`;
+  const url = `https://doctors-portal-server-alpha-kohl.vercel.app/users`;
 
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
@@ -14,12 +14,11 @@ const AllUsers = () => {
       const data = await res.json();
       return data;
     }
-
   })
 
   const handleMakeAdmin = id => {
     console.log('clicked')
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`https://doctors-portal-server-alpha-kohl.vercel.app/users/admin/${id}`, {
       method: 'PUT'
     })
       .then(res => res.json())

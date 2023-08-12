@@ -9,7 +9,7 @@ const ManageDoctor = () => {
   const { data: doctors = [], isLoading, refetch } = useQuery({
     queryKey: ['doctors'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/doctors`);
+      const res = await fetch(`https://doctors-portal-server-alpha-kohl.vercel.app/doctors`);
       const data = await res.json();
       return data;
     }
@@ -20,7 +20,7 @@ const ManageDoctor = () => {
   }
   const handleDeleteDoctor = doctor => {
     console.log('delete button clicked', doctor);
-    fetch(`http://localhost:5000/doctors/${doctor._id}`, {
+    fetch(`https://doctors-portal-server-alpha-kohl.vercel.app/doctors/${doctor._id}`, {
       method: 'DELETE',
       headers: { 'content-type': 'application.json' },
 

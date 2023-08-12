@@ -6,33 +6,22 @@ import { useQuery } from '@tanstack/react-query';
 import Loader from '../../../Layout/Loader/Loader';
 
 const AvailAppointment = ({ selected }) => {
-  // const [services, setServices] = useState([]);
   const [treatment, setTreatment] = useState(null);
   const date = format(selected, 'PP');
 
   const { data: services = [], refetch, isLoading } = useQuery({
     queryKey: ['services', date],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/services?date=${date}`)
+      const res = await fetch(`https://doctors-portal-server-alpha-kohl.vercel.app/services?date=${date}`)
       const data = await res.json();
       return data
     }
   });
+
   if (isLoading) {
     return <Loader></Loader>
   }
 
-  // const { data: services = [] } = useQuery({
-  //   queryKey: ['services'],
-  //   queryFn: () => fetch('http://localhost:5000/services')
-  //     .then(res => res.json())
-  // })
-
-  // useEffect(() => {
-  //   fetch('http://localhost:5000/services')
-  //     .then(res => res.json())
-  //     .then(data => setServices(data))
-  // }, [])
   return (
     <div className='my-16'>
       <p className='text-secondary text-center text-xl font-bold'>You have selected {format(selected, 'PP')}</p>
@@ -50,8 +39,7 @@ const AvailAppointment = ({ selected }) => {
           treatment={treatment}
           selected={selected}
           setTreatment={setTreatment}
-          refetch={refetch}
-        >
+          refetch={refetch}>
         </BookingModal>
       }
     </div>
